@@ -1,0 +1,6 @@
+re
+requests
+bs4
+termcolor
+os
+urllib
