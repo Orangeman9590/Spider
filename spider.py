@@ -63,6 +63,7 @@ while done == False:
             print(emails)
             soup = BeautifulSoup(response.text, 'lxml')
             for anchor in soup.find_all("a"):
+                
                 link = anchor.attrs["href"] if "href" in anchor.attrs else ''
                 if link.startswith('/'):
                     link = base_url + link
@@ -70,6 +71,18 @@ while done == False:
                     link = path + link
                 if not link in unprocessed_urls and not link in processed_urls:
                     unprocessed_urls.append(link)
+                if quit():
+                    print(colored('WOULD YOU LIKE SAVE ALL THE EMAILS GATHERED IN A FILE?[Y/N]', 'cyan'))
+                    validate = input('spider> ')
+                    if validate == 'Y' :
+                        f = open('emails.txt', 'w+')
+                        for email in emails :
+                            f.write(email + '\n')
+                            done = True
+                        print(colored('SAVED IN FILE: emails.txt IN THE SAME DIRECTORY AS PROGRAM'))
+                    elif validate == 'N' :
+                        print(colored('EXITING'))
+                        quit()
         # File Gather
         print(colored('WOULD YOU LIKE SAVE ALL THE EMAILS GATHERED IN A FILE?[Y/N]', 'cyan'))
         validate = input('spider> ')
