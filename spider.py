@@ -70,16 +70,16 @@ while done == False:
                     link = path + link
                 if not link in unprocessed_urls and not link in processed_urls:
                     unprocessed_urls.append(link)
-                if KeyboardInterrupt:
+                if quit():
                     print(colored('WOULD YOU LIKE SAVE ALL THE EMAILS GATHERED IN A FILE?[Y/N]', 'cyan'))
-                    validate = input('spider> ')
-                    if validate == 'Y' :
-                        f = open('emails.txt', 'w+')
-                        for email in emails :
-                            f.write(email + '\n')
+                    popo = input('spider> ')
+                    if popo == 'Y' :
+                        k = open('emails.txt', 'w+')
+                        for emaill in emails :
+                            k.write(email + '\n')
                             done = True
                         print(colored('SAVED IN FILE: emails.txt IN THE SAME DIRECTORY AS PROGRAM'))
-                    elif validate == 'N' :
+                    elif popo == 'N' :
                         print(colored('EXITING'))
                         quit()
 
