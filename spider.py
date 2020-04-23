@@ -61,8 +61,9 @@ while done == False:
             new_emails = set(re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+", response.text, re.I))
             emails.update(new_emails)
             print(emails)
-            soup = BeautifulSoup(response.text, 'lxml')
-            for anchor in soup.find_all("a"):
+            soup = BeautifulSoup(response.text, 'lxml')  
+            try:
+              for anchor in soup.find_all("a"):
                 link = anchor.attrs["href"] if "href" in anchor.attrs else ''
                 if link.startswith('/'):
                     link = base_url + link
@@ -70,18 +71,18 @@ while done == False:
                     link = path + link
                 if not link in unprocessed_urls and not link in processed_urls:
                     unprocessed_urls.append(link)
-                if quit():
-                    print(colored('WOULD YOU LIKE SAVE ALL THE EMAILS GATHERED IN A FILE?[Y/N]', 'cyan'))
-                    popo = input('spider> ')
-                    if popo == 'Y' :
-                        k = open('emails.txt', 'w+')
-                        for emaill in emails :
-                            k.write(email + '\n')
-                            done = True
-                        print(colored('SAVED IN FILE: emails.txt IN THE SAME DIRECTORY AS PROGRAM'))
-                    elif popo == 'N' :
-                        print(colored('EXITING'))
-                        quit()
+            except KeyboardInterrupt:
+              print(colored('WOULD YOU LIKE SAVE ALL THE EMAILS GATHERED IN A FILE?[Y/N]', 'cyan'))
+              popo = input('spider> ')
+              if popo == 'Y' :
+                  k = open('emails.txt', 'w+')
+                  for emaill in emails :
+                      k.write(email + '\n')
+                      done = True
+                  print(colored('SAVED IN FILE: emails.txt IN THE SAME DIRECTORY AS PROGRAM'))
+              elif popo == 'N' :
+                  print(colored('EXITING'))
+                  quit()
 
         # File Gather
         print(colored('WOULD YOU LIKE SAVE ALL THE EMAILS GATHERED IN A FILE?[Y/N]', 'cyan'))
