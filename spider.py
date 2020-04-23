@@ -52,6 +52,10 @@ while done == False:
     processed_urls = set()
     emails = set()
     r = requests.get(starting_url)
+    if requests.exceptions.MissingSchema:
+      print(colored('ENTER A VALID URL, PERHAPS https://'+ starting_url, 'red'))
+    else:
+      continue
     status = r.status_code
     os.system('clear')
     # Check if connected
