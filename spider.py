@@ -55,6 +55,7 @@ while done == False:
       r = requests.get(starting_url)
     except requests.exceptions.MissingSchema:
       print(colored('ENTER A VALID URL, PERHAPS https://'+ starting_url, 'red'))
+      time.sleep(3)
       continue
     status = r.status_code
     os.system('clear')
