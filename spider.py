@@ -31,7 +31,7 @@ def KeyboardInterruptHandler(signal, frame):
   if popo == 'Y' :
       k = open('emails.txt', 'w+')
       for emaill in emails :
-          k.write(email + '\n')
+          k.write(emaill + '\n')
           done = True
       print(colored('SAVED IN FILE: emails.txt IN THE SAME DIRECTORY AS PROGRAM'))
   elif popo == 'N' :
